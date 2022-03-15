@@ -1,0 +1,83 @@
+body {
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    line-height: 1.2;
+    color: #722d2d;
+    background-color: #f3f3f3;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 0%;
+    margin-bottom: 0%;
+    
+
+
+}
+.main_div{
+    background-color: #e9f0cd;
+
+}
+p {
+    text-indent: 20px;
+}
+.images{
+    text-indent: 0px;
+    margin: 10px;
+}
+.title {
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 4px;
+    text-decoration:underline;
+    text-transform: uppercase;
+}
+.justify {
+    text-align: justify;
+    font-weight: bold;
+    font-style: italic;
+}
+div {
+    background-color: #f3e1cb;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+ul {
+    list-style-type:square;
+    list-style-position:inside;
+    color: rgb(19, 41, 233);
+    font-family: tahoma, sans-serif;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+ol{
+    list-style-type:decimal-leading-zero;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.h {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.table {
+    border: 1px solid #2724eb;
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+}
+.table thead{
+    background-color: #dadada;
+    font-weight: bold;
+}
+.table tfoot td{
+    text-align: right;
+    border: 1px solid #2724eb;
+    column-width: 100%
+}
+.table th{
+    border: 1px solid #2724eb;
+    text-align: left;
+    padding: 2px 5px;
+}
+.table td{
+    border: 1px solid #2724eb;
+    padding: 2px 5px;
+}

@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<table class="table">
+<thead>
+    <tr>
+        <td>ID</td>
+        <td>Оборудование</td>
+        <td>Тип</td>
+    </tr>
+</thead>
+<tbody>
+    {% for i in the_results %}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+        </tr>
+    {% endfor %}
+    
+    
+
+</tbody>    
+</table>
+
+{% endblock %}

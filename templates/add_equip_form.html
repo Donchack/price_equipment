@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method='POST' action='/add_eqip'>
+<p>Добавьте наименование и цену оборудования:</p>
+<table>
+<tr><td>Наименование оборудования:</td>
+    <td>
+        <textarea class='textarea' name='name_equip' cols="100" rows="5" placeholder='Введите Наименование оборудования' ></textarea>>
+    </td>
+</tr>
+<tr><td>Тип оборудования:</td><td><input name='type_equip' type='TEXT' value=''></td></tr>
+</table>
+<p>When you're ready, click this button:</p>
+<p><input value='Do it!' type='SUBMIT'>   <input value='Clear form' type='Reset'></p>
+</form>
+
+{% endblock %}
