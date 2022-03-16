@@ -3,7 +3,30 @@
 {% block body %}
 
 <h2>{{ the_title }}</h2>
-
+<form method='POST' action='/eqip_prices'>
+    <p>Укажите значения для поиска:</p>
+    <table class="table">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Оборудование</td>
+            <td>Тип</td>
+        </tr>
+    </thead>
+    <tbody>
+            <tr>
+                <td><input name='search_id' type='TEXT' value=''></td>
+                <td><input name='search_name_eq' type='TEXT' value=''></td>
+                <td><input name='search_type_eq' type='TEXT' value=''></td>
+            </tr>
+    
+    </tbody> 
+    </table>
+    
+    <p><input value='Filter equip!' type='SUBMIT'>   <input value='Clear form' type='Reset'></p>
+    </form>
+<br>
+<br>
 <table class="table">
 <thead>
     <tr>

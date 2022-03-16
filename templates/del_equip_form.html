@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<form method='POST' action='/del_eqip_form'>
+<p>Укажите ID оборудования:</p>
+<table>
+<tr><td>ID оборудования:</td><td><input name='ID_equip' type='TEXT' value=''></td></tr>
+</table>
+<p>When you're ready, click this button:</p>
+<p><input value='Del equip!' type='SUBMIT'>   <input value='Clear form' type='Reset'></p>
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td>Оборудование</td>
+            <td>Тип</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in the_results %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+            </tr>
+        {% endfor %}
+    </tbody>    
+    </table>
+
+{% endblock %}

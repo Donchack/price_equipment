@@ -11,10 +11,10 @@ class EquipDB:
                             type text);""")
             connection.commit()
     
-    def get_eqips(self):
+    def get_eqips(self, s_id="", s_name_eq="", s_type_eq=""):
         with sqlite3.connect(self._database) as connection:
             cursor = connection.cursor()
-            result = cursor.execute("""select * from equips""")
+            result = cursor.execute("""select * from equips where id LIKE ? and equip LIKE ? and type LIKE ?""", (f'%{s_id}%',f'%{s_name_eq}%', f'%{s_type_eq}%'))
         return result
     
     def add_equip(self, equip, type):
@@ -24,6 +24,12 @@ class EquipDB:
                             values(?, ?)""", (equip, type))
             connection.commit()
     
+    def del_equip(self, id):
+        with sqlite3.connect(self._database) as connection:
+            cursor = connection.cursor()
+            cursor.execute("""delete from equips 
+                            where id = ?""", (id, ))
+            connection.commit()
 
 
     
