@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+
+<table class="table">
+<thead>
+    <tr>
+        <td>ID</td>
+        <td>Оборудование</td>
+        <td>Тип</td>
+    </tr>
+    
+</thead>
+<tbody>
+    <tr>
+        <td>{{the_res1[0]}}</td>
+        <td>{{the_res1[1]}}</td>
+        <td>{{the_res1[2]}}</td>
+    </tr>
+    
+
+</tbody>    
+</table>
+<br>
+<form method='POST' action='/add_price'>
+    <p>Добавьте цену оборудования:</p>
+    <table>
+    <tr>
+        <td>ID оборудования:</td>
+        <td>
+            <input  name='id_1_eq' type='TEXT' value={{the_res1[0]}}>
+        </td>
+    </tr>
+    <tr>
+        <td>Стоимость:</td>
+        <td>
+            <input name='price' type='TEXT' value='0,00'>
+        </td>
+    </tr>
+    <tr>
+        <td>Дата:</td>
+        <td>
+            <input name='date' type='TEXT' value=''>
+        </td>
+    </tr>
+    <tr>
+        <td>Текущая цена:</td>
+        <td>
+            <input name='actual' type='TEXT' value=''>
+        </td>
+    </tr>
+    </table>
+    <p>When you're ready, click this button:</p>
+    <p><input value='Do it!' type='SUBMIT'>   <input value='Clear form' type='Reset'></p>
+    </form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID price</td>
+            <td>ID equip</td>
+            <td>Стоимость</td>
+            <td>Дата</td>
+            <td>Текущая цена</td>
+        </tr>
+        
+    </thead>
+    <tbody>
+        {% for s in the_res2 %}
+        <tr>
+            {%  for i in s %}
+                <td>{{i}}</td>
+            {% endfor %}
+        </tr>
+        {% endfor %}    
+    </tbody>    
+    </table>
+
+{% endblock %}
