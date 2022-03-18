@@ -18,7 +18,7 @@ def eqip_prices() -> str:
 
 @app.route('/add_eqip_form', methods=['GET'])
 def add_eqip_f():
-    return render_template('add_equip_form.html')
+    return render_template('add_equip_form.html', the_title='ДОБАВЛЕНИЕ ОБОРУДОВАНИЯ')
 
 @app.route('/add_eqip', methods=['POST'])
 def add_eqip():
@@ -26,7 +26,7 @@ def add_eqip():
     name_equip = request.form['name_equip']
     type_equip = request.form['type_equip']
     result = dbs.add_equip(name_equip, type_equip)
-    return render_template('add_equip_form.html')
+    return render_template('add_equip_form.html', the_title='ДОБАВЛЕНИЕ ОБОРУДОВАНИЯ')
 
 @app.route('/del_eqip_form', methods=['GET','POST'])
 def del_eqip():
@@ -54,7 +54,7 @@ def add_price() -> str:
     # и взять первое значение этой переменной,
     # то при выполнении следующей функции с добавлением данных в таблицу возникнет блокировка БД
     equip = next(dbs.get_eqips(filter_id, '', ''))
-    dbs.add_price(filter_id,request.form['price'], request.form['date'], request.form['actual'])
+    dbs.add_price(filter_id,request.form['price'], request.form['date'])
     res_prices = dbs.get_prices(equip[0])
     return render_template('1_equip.html', the_title='Одна позиция', the_res1=equip, the_res2=res_prices)    
 

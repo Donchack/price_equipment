@@ -7,8 +7,8 @@
 <table class="table">
 <thead>
     <tr>
-        <td>ID</td>
-        <td>Оборудование</td>
+        <td width="30em">ID</td>
+        <td width="70%">Оборудование</td>
         <td>Тип</td>
     </tr>
     
@@ -25,35 +25,24 @@
 </table>
 <br>
 <form method='POST' action='/add_price'>
-    <p>Добавьте цену оборудования:</p>
+    <p class="form_p">Добавьте цену оборудования:</p>
     <table>
     <tr>
-        <td>ID оборудования:</td>
+        <td class="form_p">Стоимость:</td>
         <td>
-            <input  name='id_1_eq' type='TEXT' value={{the_res1[0]}}>
-        </td>
-    </tr>
-    <tr>
-        <td>Стоимость:</td>
-        <td>
+            <input  name='id_1_eq' type='hidden' value={{the_res1[0]}}>
             <input name='price' type='TEXT' value='0,00'>
         </td>
     </tr>
     <tr>
-        <td>Дата:</td>
+        <td class="form_p">Дата:</td>
         <td>
             <input name='date' type='TEXT' value=''>
         </td>
     </tr>
-    <tr>
-        <td>Текущая цена:</td>
-        <td>
-            <input name='actual' type='TEXT' value=''>
-        </td>
-    </tr>
     </table>
-    <p>When you're ready, click this button:</p>
-    <p><input value='Do it!' type='SUBMIT'>   <input value='Clear form' type='Reset'></p>
+    <p class="form_p">When you're ready, click this button:</p>
+    <p class="form_p"><input class='form_bottom' value='Do it!' type='SUBMIT'>   <input class='form_bottom' value='Clear form' type='Reset'></p>
     </form>
 
 <table class="table">
