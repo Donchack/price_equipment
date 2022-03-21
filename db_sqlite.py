@@ -1,18 +1,19 @@
 import sqlite3
 from time import sleep
-def ignore_case_collation(value1_, value2_):
-        if value1_.lower() == value2_.lower():
-            return 0
-        elif value1_.lower() < value2_.lower():
-            return -1
-        else:
-            return 1 
 
 def sqlite_lower(value_):
         return value_.lower()
 
 def sqlite_upper(value_):
         return value_.upper()
+
+def ignore_case_collation(value1_, value2_):
+        if value1_.lower() == value2_.lower():
+            return 0
+        elif value1_.lower() < value2_.lower():
+            return -1
+        else:
+            return 1
 
 class EquipDB:
     def __init__(self, database: str = 'equip.sqlite'):
@@ -34,11 +35,14 @@ class EquipDB:
     
     def get_eqips(self, id="", name_eq="", type_eq=""):
         with sqlite3.connect(self._database) as connection:
+            #переопределение NOCASE, LOWER, UPPER для игнорирования регистра русских букв в Unicode
             connection.create_collation("NOCASE", ignore_case_collation)
+            connection.create_function("LOWER", 1, sqlite_lower)
+            connection.create_function("UPPER", 1, sqlite_upper)
             result = connection.execute("""select eq.id, eq.equip, eq.type, pr.id_eq, pr.price, pr.date, pr.actual from equips as eq  
                         LEFT OUTER JOIN (select * from prices where actual=1) as pr
                         ON eq.id =pr.id_eq
-                        where eq.id LIKE ? and eq.equip LIKE ? and eq.type LIKE ?""", (f'%{id}%',f'%{name_eq}%', f'%{type_eq}%'))
+                        where eq.id LIKE ? and LOWER(eq.equip) LIKE ? and LOWER(eq.type) LIKE ?""", (f'%{id}%',f'%{name_eq.lower()}%', f'%{type_eq.lower()}%'))
         return result
     
     def add_equip(self, equip, type):

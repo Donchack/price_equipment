@@ -5,18 +5,19 @@
 <h2>{{ the_title }}</h2>
 
 <form method='POST' action='/del_eqip_form'>
-<table>
-<tr><td class="form_p">ID оборудования:</td><td><input name='ID_equip' type='TEXT' value=''></td></tr>
-</table>
-<p class="form_p">When you're ready, click this button:</p>
-<p class="form_p"><input class='form_bottom' value='Del equip!' type='SUBMIT'>   <input class='form_bottom' value='Clear form' type='Reset'></p>
+<div>
+    <span><input name='ID_equip' type='TEXT' value='' placeholder="ID"></span>
+    <span><input class='form_bottom' value='Удалить' type='SUBMIT'></span>
+    <span><input class='form_bottom' value='Очистить' type='Reset'></span>
+</div>
+<br>
 </form>
 <table class="table">
     <thead>
         <tr>
-            <td>ID</td>
-            <td>Оборудование</td>
-            <td>Тип</td>
+            <td width="30em">ID</td>
+            <td width="100%">Оборудование</td>
+            <td width="150em">Тип</td>
         </tr>
     </thead>
     <tbody>

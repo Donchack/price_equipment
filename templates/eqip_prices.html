@@ -4,28 +4,15 @@
 
 <h2>{{ the_title }}</h2>
 <form method='POST' action='/eqip_prices'>
-    <p class="form_p">
-        Укажите значения для поиска:
-        <input class='form_bottom' value='Filter equip!' type='SUBMIT'>
-        <input class='form_bottom' value='Clear form' type='Reset'>
-    </p>
-    <table class="table">
-        <thead>
-        <tr>
-            <td width="60em">ID</td>
-            <td width="100%">Оборудование</td>
-            <td width="175em">Тип</td>
-        </tr>
-    </thead>
-    <tbody>
-            <tr>
-                <td><input name='search_id' type='TEXT' value='' size="3"></td>
-                <td><input name='search_name_eq' type='TEXT' value='' size="100"></td>
-                <td><input name='search_type_eq' type='TEXT' value='' ></td>
-            </tr>
-    </tbody> 
-    </table>
-    
+    <p class="form_p">Укажите значения для поиска: </p>
+    <div>
+        <span><input name='search_id' type='TEXT' value='' size="3"></span>
+        <span><input name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="50"></span>
+        <span><input name='search_type_eq' type='TEXT' value="" placeholder="Тип"></span>
+        <span><input class='form_bottom' value='Найти' type='SUBMIT'></span>
+        <span><input class='form_bottom' value='Очистить' type='Reset'></span>
+    </div>   
+    <br>
 </form>
 <br>
 <form method='POST' action='/1_equip'>
@@ -50,7 +37,7 @@
             <td>{{i[4]}}</td>
             <td>{{i[5]}}</td>
             <td>{{i[6]}}</td>
-            <td><input  name='id_1_eq' type='hidden' value="{{i[0]}}"><input name='submit' value= 'Журнал цен' type='SUBMIT'></td>
+            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>Журнал цен</button></td>
         </tr>
     {% endfor %}
 </tbody>    
