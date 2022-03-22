@@ -35,7 +35,7 @@ class EquipDB:
     
     def get_eqips(self, id="", name_eq="", type_eq=""):
         with sqlite3.connect(self._database) as connection:
-            #переопределение NOCASE, LOWER, UPPER для игнорирования регистра русских букв в Unicode
+            #Redefining NOCASE, LOWER, UPPER to ignore the case of Russian letters in Unicode
             connection.create_collation("NOCASE", ignore_case_collation)
             connection.create_function("LOWER", 1, sqlite_lower)
             connection.create_function("UPPER", 1, sqlite_upper)
@@ -47,26 +47,23 @@ class EquipDB:
     
     def add_equip(self, equip, type):
         with sqlite3.connect(self._database) as connection:
-            connection.create_collation("NOCASE", ignore_case_collation)
             connection.execute("""insert into equips (equip, type)
                             values(?, ?)""", (equip, type))
     
     def del_equip(self, id):
         with sqlite3.connect(self._database) as connection:
-            connection.create_collation("NOCASE", ignore_case_collation)
             connection.execute("""delete from equips 
                             where id = ?""", (id, ))
 
     def get_prices(self, id_eq=""):
         with sqlite3.connect(self._database) as connection:
-            connection.create_collation("NOCASE", ignore_case_collation)
             result = connection.execute("""select * from prices where id_eq=? order by actual DESC, date DESC""", (id_eq,))
         return result
 
     def add_price(self, id_eq, price=0.0, date=0, actual=1):
         with sqlite3.connect(self._database) as connection:
-            connection.create_collation("NOCASE", ignore_case_collation)
             cursor = connection.cursor()
+            #Removing a sign of the relevance of the old price
             cursor.execute("""update prices set actual = ? where id_eq = ?""",(0,id_eq))
             cursor.execute("""insert into prices (id_eq, price, date, actual)
                             values(?, ?, ?, ?)""", (id_eq, price, date, actual))

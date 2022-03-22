@@ -5,19 +5,24 @@
 <h2>{{ the_title }}</h2>
 
 <form method='POST' action='/del_eqip_form'>
-<div>
-    <span><input name='ID_equip' type='TEXT' value='' placeholder="ID"></span>
-    <span><input class='form_bottom' value='Удалить' type='SUBMIT'></span>
-    <span><input class='form_bottom' value='Очистить' type='Reset'></span>
-</div>
-<br>
+    <div class="div_float">
+        <input class='input_filtr' name='ID_equip' type='TEXT' value='' placeholder="ID">
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Удалить' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Очистить' type='Reset'>
+    </div>
 </form>
+<br>
+<br>
 <table class="table">
     <thead>
         <tr>
-            <td width="30em">ID</td>
-            <td width="100%">Оборудование</td>
-            <td width="150em">Тип</td>
+            <td width="10px">ID</td>
+            <td >Оборудование</td>
+            <td width="250px">Тип</td>
         </tr>
     </thead>
     <tbody>

@@ -4,28 +4,35 @@
 
 <h2>{{ the_title }}</h2>
 <form method='POST' action='/eqip_prices'>
-    <p class="form_p">Укажите значения для поиска: </p>
-    <div>
-        <span><input name='search_id' type='TEXT' value='' size="3"></span>
-        <span><input name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="50"></span>
-        <span><input name='search_type_eq' type='TEXT' value="" placeholder="Тип"></span>
-        <span><input class='form_bottom' value='Найти' type='SUBMIT'></span>
-        <span><input class='form_bottom' value='Очистить' type='Reset'></span>
-    </div>   
-    <br>
+    <div class="div_float">
+        <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="50">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='search_type_eq' type='TEXT' value="" placeholder="Тип">
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Найти' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Очистить' type='Reset'>
+    </div>
 </form>
+<br>
 <br>
 <form method='POST' action='/1_equip'>
 <table class="table">
 <thead>
     <tr>
-        <td width="30em">ID</td>
-        <td width="100%">Оборудование</td>
-        <td width="150em">Тип</td>
-        <td width="120em">Цена</td>
-        <td width="100em">Дата</td>
-        <td width="40em">V</td>
-        <td width="90em"> </td>
+        <td width=10px>ID</td>
+        <td>Оборудование</td>
+        <td>Тип</td>
+        <td width=100px>Цена</td>
+        <td width=100px>Дата</td>
+        <td width=10px>V</td>
+        <td width=95px> </td>
     </tr>
 </thead>
 <tbody>

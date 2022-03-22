@@ -14,7 +14,20 @@ body {
 }
 .main_div{
     background-color: #e9f0cd;
-
+}
+.div_float{
+    float: left;
+    margin-left: 0;
+    margin-right: 10px;
+}
+.div_form{
+    background-color: #f3f3f3;
+    margin-left: 0;
+    margin-right: 10px;
+}
+.input_filtr{
+   height: 23px;
+   font-size: 15px;
 }
 p {
     text-indent: 20px;
@@ -73,7 +86,7 @@ ol{
     border: 1px solid #2724eb;
     width: 100%;
     border-collapse: collapse;
-    table-layout: fixed;
+    table-layout: auto;
 }
 .table thead{
     background-color: #dadada;
