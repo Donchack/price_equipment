@@ -1,4 +1,5 @@
 # price_equipment
+Links: https://flexway7.pythonanywhere.com/
 <p>Сайт позволяет вести прайс оборудования.</p>
 <p>Возможности:</p>
 	<ul>
