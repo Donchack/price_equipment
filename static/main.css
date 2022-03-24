@@ -8,12 +8,27 @@ body {
     margin-right: 10%;
     margin-top: 0%;
     margin-bottom: 0%;
-    
-
-
 }
 .main_div{
     background-color: #e9f0cd;
+}
+.a_nav{
+    text-decoration: none;
+}
+.div_nav1{
+    font-size: 18px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 1.5;
+    margin-left: 0;
+    float: none;
+}
+.div_nav2{
+    font-size: 16px;
+    font-weight: bold;
+    line-height: 1.5;
+    margin-left: 0;
+    float: none;
 }
 .div_float{
     float: left;

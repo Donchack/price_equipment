@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, escape
+from flask import Flask, render_template, request
 import db_sqlite
 
 app = Flask(__name__)
@@ -45,6 +45,15 @@ def add_price() -> str:
         dbs.add_price(filter_id, request.form['price'], request.form['date'])
     res_prices = dbs.get_prices(filter_id)
     return render_template('1_equip.html', the_title='Одна позиция', the_res1=equip, the_res2=res_prices)    
+# list_prj_form
+@app.route('/list_prj_form', methods=['GET','POST'])
+def list_prj() -> str:
+    dbs = db_sqlite.EquipDB()
+    id_prj =''
+    object =''
+    result = dbs.get_prj(id = id_prj, object = object)
+    return render_template('list_prj_form.html', the_title='CПИСОК ПРОЕКТОВ', the_results=result)
+
 
 if __name__ == '__main__':
     app.run(debug=True)

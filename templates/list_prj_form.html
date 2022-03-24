@@ -1,0 +1,51 @@
+{% extends 'base_prj.html' %}
+
+{% block body %}
+
+<h2>{{ the_title }}</h2>
+<form method='POST' action='/list_prj_form'>
+    <div class="div_float">
+        <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='search_name_prj' type='TEXT' value="" placeholder="Наименование объекта" size="50">
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Найти' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_bottom' value='Очистить' type='Reset'>
+    </div>
+</form>
+<br>
+<br>
+<form method='POST' action='#'>
+<table class="table">
+<thead>
+    <tr>
+        <td width=10px>ID</td>
+        <td width=10px align='center'>ID заказчика</td>
+        <td align='center'>Объект</td>
+        <td width=50px align='center'>ID региона</td>
+        <td width=100px align='center'>Дата создания</td>
+        <td width=100px align='center'>ID статуса</td>
+        <td width=95px> </td>
+    </tr>
+</thead>
+<tbody>
+    {% for i in the_results %}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[4]}}</td>
+            <td>{{i[5]}}</td>
+            <td>{{i[6]}}</td>
+            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
+        </tr>
+    {% endfor %}
+</tbody>    
+</table>
+</form>
+
+{% endblock %}

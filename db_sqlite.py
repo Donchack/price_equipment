@@ -1,5 +1,4 @@
 import sqlite3
-from time import sleep
 
 def sqlite_lower(value_):
         return value_.lower()
@@ -20,18 +19,46 @@ class EquipDB:
         self._database = database
         with sqlite3.connect(self._database) as connection:
             connection.create_collation("NOCASE", ignore_case_collation)
+            # таблица оборудования
             connection.execute("""create table if not exists equips (
                             id integer not null primary key autoincrement,
                             equip text not null COLLATE NOCASE,
                             type text COLLATE NOCASE);""")
+            # таблица цен
             connection.execute("""create table if not exists prices (
                             id integer not null primary key autoincrement,
                             id_eq integer not null,
                             price real not null,
                             date date,
                             actual integer, 
-                            foreign key (id_eq) references equips(id));""")                
+                            foreign key (id_eq) references equips(id));""")
+            # таблица заказчиков
+            connection.execute("""create table if not exists customer (
+                            id_cust integer not null primary key autoincrement,
+                            name_customer text not null COLLATE NOCASE,
+                            profile text COLLATE NOCASE);""")
+            # таблица статусов проектов
+            connection.execute("""create table if not exists prj_stat (
+                            id_pstat integer not null primary key autoincrement,
+                            name_status text not null COLLATE NOCASE);""")
+            # таблица регионов
+            connection.execute("""create table if not exists region (
+                            id_region integer not null primary key,
+                            name_region text not null COLLATE NOCASE);""")
+            # таблица проектов
+            connection.execute("""create table if not exists prj (
+                            id_prj integer not null primary key autoincrement,
+                            id_cust integer not null,
+                            object text COLLATE NOCASE,
+                            id_deliv_reg integer not null,
+                            date_creat date,
+                            id_status integer not null,
+                            foreign key (id_cust) references customer(id_cust),
+                            foreign key (id_deliv_reg) references region(id_region),
+                            foreign key (id_status) references prj_stat(id_pstat));""")
+            # таблица калькуляций
             
+            #таблица истории  проекта                
     
     def get_eqips(self, id="", name_eq="", type_eq=""):
         with sqlite3.connect(self._database) as connection:
@@ -68,6 +95,16 @@ class EquipDB:
             cursor.execute("""insert into prices (id_eq, price, date, actual)
                             values(?, ?, ?, ?)""", (id_eq, price, date, actual))
 
+    def get_prj(self, id="", object="", type_eq=""):
+        with sqlite3.connect(self._database) as connection:
+            #Redefining NOCASE, LOWER, UPPER to ignore the case of Russian letters in Unicode
+            connection.create_collation("NOCASE", ignore_case_collation)
+            connection.create_function("LOWER", 1, sqlite_lower)
+            connection.create_function("UPPER", 1, sqlite_upper)
+            result = connection.execute("""select * from prj where
+                            id_prj=? and LOWER(object) LIKE ?
+                            """, (id, f'%{object.lower()}%'))
+        return result
 
 
     
