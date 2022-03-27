@@ -2,26 +2,25 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
 <form method='POST' action='/eqip_prices'>
+    
     <div class="div_float">
         <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="50">
+        <input class='input_filtr' name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="40">
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='search_type_eq' type='TEXT' value="" placeholder="Тип">
+        <input class='input_filtr' name='search_type_eq' type='TEXT' value="" placeholder="Тип" size="15">
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Найти' type='SUBMIT'>
+        <input class='form_button' name='bottom_find' value='Найти' type='SUBMIT'>
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Очистить' type='Reset'>
+        <input class='form_button' name='bottom_clear' value='Сбросить' type='SUBMIT'>
     </div>
 </form>
-<br>
-<br>
+<div style="clear:both;"></div>
 <form method='POST' action='/1_equip'>
 <table class="table">
 <thead>
@@ -44,7 +43,7 @@
             <td>{{i[4]}}</td>
             <td>{{i[5]}}</td>
             <td>{{i[6]}}</td>
-            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>Журнал цен</button></td>
+            <td><button class="tb_button" name='id_1_eq' value={{i[0]}} type='SUBMIT'>Журнал цен</button></td>
         </tr>
     {% endfor %}
 </tbody>    

@@ -2,8 +2,6 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
-
 <table class="table">
 <thead>
     <tr>
@@ -11,7 +9,6 @@
         <td >Оборудование</td>
         <td width="250px">Тип </td>
     </tr>
-    
 </thead>
 <tbody>
     <tr>
@@ -19,12 +16,11 @@
         <td>{{the_res1[1]}}</td>
         <td>{{the_res1[2]}}</td>
     </tr>
-    
-
 </tbody>    
 </table>
 <form method='POST' action='/1_equip'>
-    <p class="form_p">Добавьте цену оборудования:</p>
+    <br>
+    <div class="form_text">Добавьте цену оборудования:</div>
     <div class="div_float">
         <input  name='id_1_eq' type='hidden' value={{the_res1[0]}}>
         <input class='input_filtr' name='price' type='TEXT' value='' placeholder="Стоимость">
@@ -33,10 +29,10 @@
         <input class='input_filtr' name='date' type='TEXT' value='' placeholder="Дата">
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Добавить' type='SUBMIT'>
+        <input class='form_button' value='Добавить' type='SUBMIT'>
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Очистить' type='Reset'>
+        <input class='form_button' value='Очистить' type='Reset'>
     </div>
 </form>
 <br>

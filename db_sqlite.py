@@ -105,7 +105,32 @@ class EquipDB:
                             id_prj=? and LOWER(object) LIKE ?
                             """, (id, f'%{object.lower()}%'))
         return result
+    
+    def get_customer(self, id_cust="", customer="", prof=""):
+        with sqlite3.connect(self._database) as connection:
+            #Redefining LOWER to ignore the case of Russian letters in Unicode
+            connection.create_function("LOWER", 1, sqlite_lower)
+            # compare the lower symbols from the table with the lower symbols from the function parameters
+            result = connection.execute("""select * from customer
+                            where id_cust LIKE ? and LOWER(name_customer) LIKE ? and LOWER(profile) LIKE ?
+                            order by id_cust""", (f'%{id_cust}%', f'%{customer.lower()}%', f'%{prof.lower()}%'))
+        return result
 
+    def add_customer(self, customer, prof):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""insert into customer (name_customer, profile)
+                            values(?, ?)""", (customer, prof))
+    
+    def del_customer(self, id):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""delete from customer 
+                            where id_cust = ?""", (id, ))
+
+    def upd_customer(self, id, customer, prof):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""update customer 
+                            SET name_customer=?, profile=?
+                            where id_cust = ?""", (id, customer, prof))
 
     
 

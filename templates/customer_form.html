@@ -1,0 +1,63 @@
+{% extends 'base_adm.html' %}
+
+{% block body %}
+
+<form method='POST' name="find" action='/customer_form'>
+    <div class="div_float">
+        <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='search_name_cust' type='TEXT' value="" placeholder="Наименование заказчика" size="50">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='search_name_prof' type='TEXT' value="" placeholder="Профиль" size="10">
+    </div>
+    <div class="div_float">
+        <input class='form_button' name='bottom_find' value='Найти' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_button' name='bottom_clear' value='Сбросить' type='SUBMIT'>
+    </div>
+</form>
+<div style="clear:both;"></div>
+<form method='POST' name="add" action='/customer_form'>
+    <div class="div_float">
+        <input class='input_filtr' name='add_name_cust' type='TEXT' value="" placeholder="Наименование заказчика" size="50">
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='add_name_prof' type='TEXT' value="" placeholder="Профиль" size="10">
+    </div>
+    <div class="div_float">
+        <input class='form_button' name='button_add' value='Добавить' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_button' value='Очистить' type='Reset'>
+    </div>
+</form>
+<div style="clear:both;"></div>
+<form method='POST' action='/customer_form'>
+<table class="table">
+<thead>
+    <tr>
+        <td width=10px>ID</td>
+        <td align='center'>Наименование</td>
+        <td width=50px align='center'>Профиль</td>
+        <td width=95px> </td>
+        <td width=95px> </td>
+    </tr>
+</thead>
+<tbody>
+    {% for i in the_results %}
+        <tr> 
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td><button class="tb_button" name='upd_cust' value={{i[0]}} formaction='/upd_customer' type='SUBMIT'>Править</button></td>
+            <td><button class="tb_button" name='del_cust' value={{i[0]}} type='SUBMIT'>Удалить</button></td>
+        </tr>
+    {% endfor %}
+</tbody>    
+</table>
+</form>
+
+{% endblock %}

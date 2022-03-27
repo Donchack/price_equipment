@@ -2,7 +2,6 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
 <form method='POST' action='/list_prj_form'>
     <div class="div_float">
         <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
@@ -11,14 +10,13 @@
         <input class='input_filtr' name='search_name_prj' type='TEXT' value="" placeholder="Наименование объекта" size="50">
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Найти' type='SUBMIT'>
+        <input class='form_button' value='Найти' type='SUBMIT'>
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Очистить' type='Reset'>
+        <input class='form_button' value='Очистить' type='Reset'>
     </div>
 </form>
-<br>
-<br>
+<div style="clear:both;"></div>
 <form method='POST' action='#'>
 <table class="table">
 <thead>

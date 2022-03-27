@@ -2,20 +2,18 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
-
 <form method='POST' action='/add_eqip_form'>
 <div class="div_form">
-    <textarea class='input_filtr' name='name_equip' cols="100" rows="5" placeholder='Наименование оборудования' ></textarea>
+<input class='input_filtr' name='name_equip' type='TEXT' size="70" maxlength="150" placeholder='Наименование оборудования'>
 </div>
 <div class="div_form">
     <input class='input_filtr' name='type_equip' type='TEXT' value='' placeholder="Тип оборудования">
 </div>
 <div class="div_float">
-    <input class='form_bottom' value='Добавить' type='SUBMIT'>
+    <input class='form_button' value='Добавить' type='SUBMIT'>
 </div>
 <div class="div_float">
-    <input class='form_bottom' value='Очистить' type='Reset'>
+    <input class='form_button' value='Очистить' type='Reset'>
 </div>
     
 </form>

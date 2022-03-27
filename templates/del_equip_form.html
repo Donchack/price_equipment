@@ -2,21 +2,18 @@
 
 {% block body %}
 
-<h2>{{ the_title }}</h2>
-
 <form method='POST' action='/del_eqip_form'>
     <div class="div_float">
         <input class='input_filtr' name='ID_equip' type='TEXT' value='' placeholder="ID">
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Удалить' type='SUBMIT'>
+        <input class='form_button' value='Удалить' type='SUBMIT'>
     </div>
     <div class="div_float">
-        <input class='form_bottom' value='Очистить' type='Reset'>
+        <input class='form_button' value='Очистить' type='Reset'>
     </div>
 </form>
-<br>
-<br>
+<div style="clear:both;"></div>
 <table class="table">
     <thead>
         <tr>
