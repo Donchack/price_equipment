@@ -68,6 +68,9 @@ body {
 .a_nav:visited{
     color:#528b9c;
 }
+.select .a_nav{
+    color:white;
+}
 .select .a_nav:visited{
     color:white;
 }

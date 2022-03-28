@@ -3,19 +3,19 @@
 {% block body %}
 <form method='POST' name="update" action='/customer_form'>
     <div class="div_float">
-        <input class='input_filtr' name='id' type='TEXT' value={{the_result[0]}} placeholder="ID" size="3" readonly>
+        <input class='input_filtr' name='upd_id' type='TEXT' value={{ the_result[0] }} placeholder="ID" size="3" readonly>
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='upd_name_cust' type='TEXT' value={{the_result[1]}} placeholder="Наименование заказчика" size="50">
+        <input class='input_filtr' name='upd_name_cust' type='TEXT' value='{{the_result[1]}}' placeholder="Наименование заказчика" size="50">
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='upd_prof_cust' type='TEXT' value={{the_result[2]}} placeholder="Профиль" size="15">
+        <input class='input_filtr' name='upd_prof_cust' type='TEXT' value='{{the_result[2]}}' placeholder="Профиль" size="15">
     </div>
     <div class="div_float">
-        <input class='form_button' name='bottom_upd' value='Сохранить' type='SUBMIT'>
+        <input class='form_button' name='button_upd' value='Сохранить' type='SUBMIT'>
     </div>
     <div class="div_float">
-        <input class='form_button' name='bottom_clear' value='Сбросить' type='Reset'>
+        <input class='form_button' name='button_clear' value='Сбросить' type='Reset'>
     </div>
 </form>
 

@@ -73,10 +73,17 @@ def del_prj() -> str:
 @app.route('/customer_form', methods=['GET','POST'])
 def customer_form():
     dbs = db_sqlite.EquipDB()
-    # if press button with name='button_add' then exist adding customer
+    # if press button with name='button_upd' then run update customer
+    print(f"'button_upd': {request.form.get('button_upd')}, 'button_add': {request.form.get('button_add')}, 'del_cust': {request.form.get('del_cust')}")
+    if request.form.get('button_upd') and request.form.get('upd_name_cust') and request.form.get('upd_prof_cust'):
+        dbs.upd_customer(request.form.get('upd_id'), request.form.get('upd_name_cust'), request.form.get('upd_prof_cust'))
+        #print in console attributes from the update form
+        print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'add_name_cust': {request.form.get('upd_name_cust')}, 'add_name_prof': {request.form.get('upd_prof_cust')}")
+    # if press button with name='button_add' then run adding customer
     if request.form.get('button_add') and request.form.get('add_name_cust') and request.form.get('add_name_prof'):
         dbs.add_customer(request.form.get('add_name_cust'), request.form.get('add_name_prof'))
-    # if press button with name='del_cust' then exist removal customer
+        print(f" 'add_name_cust': {request.form.get('add_name_cust')}, 'add_name_prof': {request.form.get('add_name_prof')}")
+    # if press button with name='del_cust' then run removal customer
     if request.form.get('del_cust'):
         dbs.del_customer(request.form.get('del_cust'))
     # get values attributes for select customer 
@@ -92,6 +99,9 @@ def upd_customer():
     dbs = db_sqlite.EquipDB()
     if request.form.get('upd_cust'):
         result=next(dbs.get_customer(request.form.get('upd_cust'), "", ""))
+        for i in result:
+            print(i, end=' ')
+        print()
         return render_template('upd_cust.html', the_title='Правка заказчика', the_part1='adm', the_part2='customer', the_result=result)
 
 @app.route('/prj_stat_form')

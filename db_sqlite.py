@@ -130,7 +130,7 @@ class EquipDB:
         with sqlite3.connect(self._database) as connection:
             connection.execute("""update customer 
                             SET name_customer=?, profile=?
-                            where id_cust = ?""", (id, customer, prof))
+                            where id_cust = ?""", (customer, prof, id))
 
     
 

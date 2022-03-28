@@ -1,4 +1,5 @@
 __pycache__/
 venv/
+prj/
 test.py
 equip.sqlite
