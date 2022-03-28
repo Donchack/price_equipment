@@ -131,6 +131,31 @@ class EquipDB:
             connection.execute("""update customer 
                             SET name_customer=?, profile=?
                             where id_cust = ?""", (customer, prof, id))
+    
+    def get_prj_stat(self, id_pstat="", prj_stat=""):
+        with sqlite3.connect(self._database) as connection:
+            #Redefining LOWER to ignore the case of Russian letters in Unicode
+            connection.create_function("LOWER", 1, sqlite_lower)
+            # compare the lower symbols from the table with the lower symbols from the function parameters
+            result = connection.execute("""select * from prj_stat
+                            where id_pstat LIKE ? and LOWER(name_status) LIKE ?
+                            order by id_pstat""", (f'%{id_pstat}%', f'%{prj_stat.lower()}%'))
+        return result
+    
+    def add_prj_stat(self, prj_stat):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""insert into prj_stat (name_status) values(?)""", (prj_stat,))
+    
+    def del_prj_stat(self, id):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""delete from prj_stat 
+                            where id_pstat = ?""", (id,))
+
+    def upd_prj_stat(self, id, prj_stat):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""update prj_stat 
+                            SET name_status=?
+                            where id_pstat = ?""", (prj_stat, id))
 
     
 

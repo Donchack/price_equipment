@@ -20,7 +20,7 @@
     </div>
 </form>
 <div style="clear:both;"></div>
-<form method='POST' name="add" action='/customer_form'>
+<form method='POST' name="add" action='/add_cust'>
     <div class="div_float">
         <input class='input_filtr' name='add_name_cust' type='TEXT' value="" placeholder="Наименование заказчика" size="50">
     </div>
@@ -52,8 +52,8 @@
             <td>{{i[0]}}</td>
             <td>{{i[1]}}</td>
             <td>{{i[2]}}</td>
-            <td><button class="tb_button" name='upd_cust' value={{i[0]}} formaction='/upd_customer' type='SUBMIT'>Изменить</button></td>
-            <td><button class="tb_button" name='del_cust' value={{i[0]}} type='SUBMIT'>Удалить</button></td>
+            <td><button class="tb_button" name='upd_cust' value={{i[0]}} formaction='/upd_cust_form' type='SUBMIT'>Изменить</button></td>
+            <td><button class="tb_button" name='del_cust' value={{i[0]}} formaction='/del_cust' type='SUBMIT'>Удалить</button></td>
         </tr>
     {% endfor %}
 </tbody>    

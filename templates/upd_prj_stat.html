@@ -1,15 +1,12 @@
 {% extends 'base_adm.html' %}
 
 {% block body %}
-<form method='POST' name="update" action='/upd_cust'>
+<form method='POST' name="update" action='/upd_prj_stat'>
     <div class="div_float">
         <input class='input_filtr' name='upd_id' type='TEXT' value={{ the_result[0] }} placeholder="ID" size="3" readonly>
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='upd_name_cust' type='TEXT' value='{{the_result[1]}}' placeholder="Наименование заказчика" size="50">
-    </div>
-    <div class="div_float">
-        <input class='input_filtr' name='upd_prof_cust' type='TEXT' value='{{the_result[2]}}' placeholder="Профиль" size="15">
+        <input class='input_filtr' name='upd_name_prj_stat' type='TEXT' value='{{the_result[1]}}' placeholder="Статус" size="50">
     </div>
     <div class="div_float">
         <input class='form_button' name='button_upd' value='Сохранить' type='SUBMIT'>

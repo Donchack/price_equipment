@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect
 import db_sqlite
 
 app = Flask(__name__)
@@ -72,41 +72,101 @@ def del_prj() -> str:
 @app.route('/admin')
 @app.route('/customer_form', methods=['GET','POST'])
 def customer_form():
-    dbs = db_sqlite.EquipDB()
-    # if press button with name='button_upd' then run update customer
-    print(f"'button_upd': {request.form.get('button_upd')}, 'button_add': {request.form.get('button_add')}, 'del_cust': {request.form.get('del_cust')}")
-    if request.form.get('button_upd') and request.form.get('upd_name_cust') and request.form.get('upd_prof_cust'):
-        dbs.upd_customer(request.form.get('upd_id'), request.form.get('upd_name_cust'), request.form.get('upd_prof_cust'))
-        #print in console attributes from the update form
-        print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'add_name_cust': {request.form.get('upd_name_cust')}, 'add_name_prof': {request.form.get('upd_prof_cust')}")
-    # if press button with name='button_add' then run adding customer
-    if request.form.get('button_add') and request.form.get('add_name_cust') and request.form.get('add_name_prof'):
-        dbs.add_customer(request.form.get('add_name_cust'), request.form.get('add_name_prof'))
-        print(f" 'add_name_cust': {request.form.get('add_name_cust')}, 'add_name_prof': {request.form.get('add_name_prof')}")
-    # if press button with name='del_cust' then run removal customer
-    if request.form.get('del_cust'):
-        dbs.del_customer(request.form.get('del_cust'))
     # get values attributes for select customer 
     s_id = request.form.get('search_id','')
     s_name_cust = request.form.get('search_name_cust','')
     s_prof_cust = request.form.get('search_name_prof','')
+    dbs = db_sqlite.EquipDB()
     # get result select customer
     result=dbs.get_customer(s_id, s_name_cust, s_prof_cust)
-    return render_template('customer_form.html', the_title='Форма заказчиков', the_part1='adm', the_part2='customer', the_results=result, the_req=str(request.form))
+    return render_template('customer_form.html', the_title='Форма заказчиков', the_part1='adm', the_part2='customer', the_results=result)
 
-@app.route('/upd_customer', methods=['POST'])
-def upd_customer():
+# add customer 
+@app.route('/add_cust', methods=['POST'])
+def add_cust():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_add' then run adding customer
+    if request.form.get('button_add') and request.form.get('add_name_cust') and request.form.get('add_name_prof'):
+        dbs.add_customer(request.form.get('add_name_cust'), request.form.get('add_name_prof'))
+        print(f" 'add_name_cust': {request.form.get('add_name_cust')}, 'add_name_prof': {request.form.get('add_name_prof')}")
+    return redirect('/customer_form')
+
+# del customer 
+@app.route('/del_cust', methods=['POST'])
+def del_cust():
+    dbs=db_sqlite.EquipDB()
+    # if press button with name='del_cust' then run removal customer
+    if request.form.get('del_cust'):
+        dbs.del_customer(request.form.get('del_cust'))
+    return redirect('/customer_form')
+
+# update customer form
+@app.route('/upd_cust_form', methods=['POST'])
+def upd_cust_form():
     dbs = db_sqlite.EquipDB()
     if request.form.get('upd_cust'):
         result=next(dbs.get_customer(request.form.get('upd_cust'), "", ""))
-        for i in result:
-            print(i, end=' ')
-        print()
         return render_template('upd_cust.html', the_title='Правка заказчика', the_part1='adm', the_part2='customer', the_result=result)
 
-@app.route('/prj_stat_form')
+# update customer
+@app.route('/upd_cust', methods=['POST'])
+def upd_cust():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_upd' then run update customer
+    if request.form.get('button_upd') and request.form.get('upd_name_cust') and request.form.get('upd_prof_cust'):
+        dbs.upd_customer(request.form.get('upd_id'), request.form.get('upd_name_cust'), request.form.get('upd_prof_cust'))
+        #print in console attributes from the update form
+        print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'add_name_cust': {request.form.get('upd_name_cust')}, 'add_name_prof': {request.form.get('upd_prof_cust')}")
+    return redirect('/customer_form')
+
+# prj_stat form
+@app.route('/prj_stat_form', methods=['GET','POST'])
 def prj_stat_form():
-    return render_template('base_adm.html', the_title='Статусы', the_part1='adm', the_part2='stat')
+    # get values attributes for select prj_stat 
+    s_id = request.form.get('search_id','')
+    s_name_prj_stat = request.form.get('search_prj_stat','')
+    dbs = db_sqlite.EquipDB()
+    # get result select prj_stat
+    result=dbs.get_prj_stat(s_id, s_name_prj_stat)
+    return render_template('prj_stat_form.html', the_title='Статусы', the_part1='adm', the_part2='stat', the_results=result)
+
+# add prj_stat
+@app.route('/add_prj_stat', methods=['POST'])
+def add_prj_stat():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_add' then run adding prj_stat
+    if request.form.get('button_add') and request.form.get('add_name_prj_stat'):
+        dbs.add_prj_stat(request.form.get('add_name_prj_stat'))
+        print(f" 'add_name_prj_stat': {request.form.get('add_name_prj_stat')}")
+    return redirect('/prj_stat_form')
+
+# del prj_stat
+@app.route('/del_prj_stat', methods=['POST'])
+def del_prj_stat():
+    dbs=db_sqlite.EquipDB()
+    # if press button with name='del_cust' then run removal prj_stat
+    if request.form.get('del_prj_stat'):
+        dbs.del_prj_stat(request.form.get('del_prj_stat'))
+    return redirect('/prj_stat_form')
+
+# update prj_stat form
+@app.route('/upd_prj_stat_form', methods=['POST'])
+def upd_prj_stat_form():
+    dbs = db_sqlite.EquipDB()
+    if request.form.get('upd_prj_stat'):
+        result=next(dbs.get_prj_stat(request.form.get('upd_prj_stat', '')))
+        return render_template('upd_prj_stat.html', the_title='Правка статуса', the_part1='adm', the_part2='stat', the_result=result)
+
+# update prj_stat
+@app.route('/upd_prj_stat', methods=['POST'])
+def upd_prj_stat():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_upd' then run update prj_stat
+    if request.form.get('button_upd') and request.form.get('upd_name_prj_stat'):
+        dbs.upd_prj_stat(request.form.get('upd_id'), request.form.get('upd_name_prj_stat'))
+        #print in console attributes from the update form
+        print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'upd_name_prj_stat': {request.form.get('upd_name_prj_stat')}")
+    return redirect('/prj_stat_form')
 
 @app.route('/region_form')
 def region_form():
