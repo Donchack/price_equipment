@@ -156,6 +156,31 @@ class EquipDB:
             connection.execute("""update prj_stat 
                             SET name_status=?
                             where id_pstat = ?""", (prj_stat, id))
+    
+    def get_region(self, id="", name_region=""):
+        with sqlite3.connect(self._database) as connection:
+            #Redefining LOWER to ignore the case of Russian letters in Unicode
+            connection.create_function("LOWER", 1, sqlite_lower)
+            # compare the lower symbols from the table with the lower symbols from the function parameters
+            result = connection.execute("""select * from region
+                            where id_region LIKE ? and LOWER(name_region) LIKE ?
+                            order by id_region""", (f'%{id}%', f'%{name_region.lower()}%'))
+        return result
+    
+    def add_region(self, id, name_region):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""insert into region (id_region, name_region) values(?, ?)""", (id, name_region,))
+    
+    def del_region(self, id):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""delete from region 
+                            where id_region = ?""", (id,))
+
+    def upd_region(self, id, name_region):
+        with sqlite3.connect(self._database) as connection:
+            connection.execute("""update region 
+                            SET name_region=?
+                            where id_region = ?""", (name_region, id))
 
     
 

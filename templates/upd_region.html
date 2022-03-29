@@ -1,0 +1,19 @@
+{% extends 'base_adm.html' %}
+
+{% block body %}
+<form method='POST' name="update" action='/upd_region'>
+    <div class="div_float">
+        <input class='input_filtr' name='upd_id' type='TEXT' value={{ the_result[0] }} placeholder="Код" size="3" readonly>
+    </div>
+    <div class="div_float">
+        <input class='input_filtr' name='upd_region' type='TEXT' value='{{the_result[1]}}' placeholder="Название региона" size="50">
+    </div>
+    <div class="div_float">
+        <input class='form_button' name='button_upd' value='Сохранить' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_button' name='button_clear' value='Сбросить' type='Reset'>
+    </div>
+</form>
+
+{% endblock %}

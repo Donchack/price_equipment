@@ -168,9 +168,54 @@ def upd_prj_stat():
         print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'upd_name_prj_stat': {request.form.get('upd_name_prj_stat')}")
     return redirect('/prj_stat_form')
 
-@app.route('/region_form')
+# region form
+@app.route('/region_form', methods=['GET','POST'])
 def region_form():
-    return render_template('base_adm.html', the_title='Регионы', the_part1='adm', the_part2='region')
+    # get values attributes for select region 
+    s_id = request.form.get('search_id','')
+    s_region = request.form.get('search_region','')
+    dbs = db_sqlite.EquipDB()
+    # get result select region
+    result=dbs.get_region(s_id, s_region)
+    return render_template('region_form.html', the_title='Регионы', the_part1='adm', the_part2='region', the_results=result)
+
+# add region
+@app.route('/add_region', methods=['POST'])
+def add_region():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_add' then run adding region
+    if request.form.get('button_add') and request.form.get('add_region_id') and request.form.get('add_region_name'):
+        dbs.add_region(request.form.get('add_region_id'), request.form.get('add_region_name'))
+        print(f" 'add_region_id': {request.form.get('add_region_id')}, 'add_region_name': {request.form.get('add_region_name')}")
+    return redirect('/region_form')
+
+# del region
+@app.route('/del_region', methods=['POST'])
+def del_region():
+    dbs=db_sqlite.EquipDB()
+    # if press button with name='del_region' then run removal region
+    if request.form.get('del_region'):
+        dbs.del_region(request.form.get('del_region'))
+    return redirect('/region_form')
+
+# update region form
+@app.route('/upd_region_form', methods=['POST'])
+def upd_region_form():
+    dbs = db_sqlite.EquipDB()
+    if request.form.get('upd_region'):
+        result=next(dbs.get_region(request.form.get('upd_region')))
+        return render_template('upd_region.html', the_title='Правка статуса', the_part1='adm', the_part2='region', the_result=result)
+
+# update region
+@app.route('/upd_region', methods=['POST'])
+def upd_region():
+    dbs = db_sqlite.EquipDB()
+    # if press button with name='button_upd' then run update region
+    if request.form.get('button_upd') and request.form.get('upd_region'):
+        dbs.upd_region(request.form.get('upd_id'), request.form.get('upd_region'))
+        #print in console attributes from the update form
+        print(f"'button_upd': {request.form.get('button_upd')}, upd_id: {request.form.get('upd_id')} 'upd_region': {request.form.get('upd_region')}")
+    return redirect('/region_form')
 
 if __name__ == '__main__':
     app.run(debug=True)
