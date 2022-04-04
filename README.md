@@ -6,9 +6,10 @@ Links: https://flexway7.pythonanywhere.com/
 	<li>просмотр списка оборудования с текущей ценой;</li>
 	<li>добавление оборудования;</li>
 	<li>удаление оборудования по его ID;</li>
-	<li>регистронезависимый фильтр списка оборудовния по ID, наименованию, типу;</li>
+	<li>регистронезависимый поиск по текстовым полям списка оборудования, и служебным таблицам;</li>
 	<li>просмотр истории цен оборудования;</li>
-	<li>добавление цены оборудования.</li>
+	<li>добавление цены оборудования;</li>
+	<li>реализованы функции CRUD для служебных таблиц.</li>
 	</ul>
 <p>Планы:</p>
 	<ul>
@@ -24,9 +25,10 @@ Links: https://flexway7.pythonanywhere.com/
 <li>view the list of equipment with the current price;</li>
 <li>adding equipment;</li>
 <li>removal of equipment by its ID;</li>
-<li>case-independent filter of the list of equipment by ID, name, type;</li>
+<li>case-independent search in the text fields of the equipment list, and service tables;</li>
 <li>view the history of equipment prices;</li>
-<li>adding the price of the equipment.</li>
+<li>adding the price of the equipment;</li>
+<li>implemented CRUD functions for service tables.</li>
 </ul>
 <p>Plans:</p>
 <ul>
