@@ -95,17 +95,42 @@ class EquipDB:
             cursor.execute("""insert into prices (id_eq, price, date, actual)
                             values(?, ?, ?, ?)""", (id_eq, price, date, actual))
 
-    def get_prj(self, id="", object="", type_eq=""):
+    def get_prj(self, id="", object="", stat=""):
         with sqlite3.connect(self._database) as connection:
             #Redefining NOCASE, LOWER, UPPER to ignore the case of Russian letters in Unicode
             connection.create_collation("NOCASE", ignore_case_collation)
             connection.create_function("LOWER", 1, sqlite_lower)
-            connection.create_function("UPPER", 1, sqlite_upper)
-            result = connection.execute("""select * from prj where
-                            id_prj=? and LOWER(object) LIKE ?
-                            """, (id, f'%{object.lower()}%'))
+            result = connection.execute("""select prj.id_prj, customer.name_customer, prj.object, region.name_region, prj.date_creat, prj_stat.name_status
+                            from prj, customer, region, prj_stat 
+                            where id_prj LIKE ? and LOWER(object) LIKE ? and id_status LIKE ? 
+                            and prj.id_cust=customer.id_cust 
+                            and prj.id_deliv_reg=region.id_region 
+                            and prj.id_status=prj_stat.id_pstat """, 
+                            (f'%{id}%', f'%{object.lower()}%', f'%{stat.lower()}%'))
         return result
     
+    def add_prj(self, id_cust='', object='', id_deliv_reg='', date_creat='', id_status=''):
+        with sqlite3.connect(self._database) as connection:
+            #
+            # print(f'Add in db name_obj= {object}   id_cust={id_cust}   id_reg= {id_deliv_reg}   date= {date_creat}  id_stat= {id_status}')
+            connection.create_collation("NOCASE", ignore_case_collation)
+            connection.execute("""insert into prj (id_cust, object, id_deliv_reg, date_creat, id_status)
+                            values(?, ?, ?, ?, ?)""", (int(id_cust), object, int(id_deliv_reg), date_creat, int(id_status)))
+    
+                            # """create table if not exists prj (
+                            # id_prj integer not null primary key autoincrement,
+                            # id_cust integer not null,
+                            # object text COLLATE NOCASE,
+                            # id_deliv_reg integer not null,
+                            # date_creat date,
+                            # id_status integer not null,
+                            # foreign key (id_cust) references customer(id_cust),
+                            # foreign key (id_deliv_reg) references region(id_region),
+                            # foreign key (id_status) references prj_stat(id_pstat));"""
+        
+   
+   
+   
     def get_customer(self, id_cust="", customer="", prof=""):
         with sqlite3.connect(self._database) as connection:
             #Redefining LOWER to ignore the case of Russian letters in Unicode

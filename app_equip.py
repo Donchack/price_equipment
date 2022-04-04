@@ -3,7 +3,6 @@ import db_sqlite
 
 app = Flask(__name__)
 
-
 @app.route('/eqip_prices', methods=['GET','POST'])
 def eqip_prices() -> str:
     dbs = db_sqlite.EquipDB()
@@ -57,12 +56,38 @@ def list_prj() -> str:
     dbs = db_sqlite.EquipDB()
     id_prj =''
     object =''
-    result = dbs.get_prj(id = id_prj, object = object)
+    prj_stat = ''
+    result = dbs.get_prj(id = id_prj, object = object, stat = prj_stat)
     return render_template('list_prj_form.html', the_title='CПИСОК ПРОЕКТОВ', the_results=result, the_part1='prj', the_part2='prj')
 
+#form add project
 @app.route('/add_prj_form', methods=['GET','POST'])
-def add_prj() -> str:
-    return render_template('list_prj_form.html', the_title='Добавление проекта', the_part1='prj', the_part2='add')
+def add_prj_form() -> str:
+    dbs = db_sqlite.EquipDB()
+    # get customer list (id, customer)
+    cust = dbs.get_customer()
+    # get region list (id, region)
+    reg = dbs.get_region()
+    # get project status list (id, prg_stat)
+    stat = dbs.get_prj_stat()
+    return render_template('add_prj_form.html', the_title='Добавление проекта', the_part1='prj', the_part2='add', 
+                        the_cust=cust, the_reg=reg, the_stat=stat)
+
+#add new project in database
+@app.route('/add_prj', methods=['POST'])
+def add_prj():
+    dbs = db_sqlite.EquipDB()
+    # сделать проверку с возвратом на форму ввода и выводом сообщения об добавлении или причине не добавления
+    name_obj = request.form.get('name_prj','')
+    id_cust = request.form.get('id_cust','')
+    id_reg = request.form.get('id_reg','')
+    date = request.form.get('date','')
+    id_stat = request.form.get('id_stat','')
+    # print in console data from form
+    
+    dbs.add_prj(id_cust, name_obj, id_reg, date, id_stat)
+    # return on list_prj_form 
+    return redirect('/list_prj_form')
 
 @app.route('/del_prj_form', methods=['GET','POST'])
 def del_prj() -> str:

@@ -22,11 +22,11 @@
 <thead>
     <tr>
         <td width=10px>ID</td>
-        <td width=10px align='center'>ID заказчика</td>
+        <td width=150px align='center'>Заказчик</td>
         <td align='center'>Объект</td>
-        <td width=50px align='center'>ID региона</td>
+        <td width=150px align='center'>Регион</td>
         <td width=100px align='center'>Дата создания</td>
-        <td width=100px align='center'>ID статуса</td>
+        <td width=110px align='center'>Статус</td>
         <td width=95px> </td>
     </tr>
 </thead>
@@ -36,9 +36,9 @@
             <td>{{i[0]}}</td>
             <td>{{i[1]}}</td>
             <td>{{i[2]}}</td>
-            <td>{{i[4]}}</td>
-            <td>{{i[5]}}</td>
-            <td>{{i[6]}}</td>
+            <td>{{i[3]}}</td>
+            <td align='center'>{{i[4]}}</td>
+            <td align='center'>{{i[5]}}</td>
             <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
         </tr>
     {% endfor %}

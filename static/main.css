@@ -68,11 +68,17 @@ body {
 .a_nav:visited{
     color:#528b9c;
 }
+.a_nav:hover{
+    color:#00bbbb;
+}
 .select .a_nav{
     color:white;
 }
 .select .a_nav:visited{
     color:white;
+}
+.select .a_nav:hover{
+    color:#9bfcf4;
 }
 .div_float{
     float: left;
@@ -109,6 +115,9 @@ p {
     border: 0;
     padding: 5px;
 }
+.form_button:hover{
+    color:#9bfcf4;
+}
 .tb_button{
     color:#528b9c;
     font-size: 15px;
@@ -117,7 +126,10 @@ p {
     border: 0;
     padding: 5px;
 }
-
+.tb_button:hover{
+    color:#0a636e;
+    font-weight: bold;
+}
 .images{
     text-indent: 0px;
     margin: 10px;

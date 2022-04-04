@@ -1,0 +1,73 @@
+{% extends 'base_prj.html' %}
+
+{% block body %}
+
+<form method='POST' action='/add_prj'>
+    <div class="div_form">
+        <input class='input_filtr' name='name_prj' type='TEXT' value="" placeholder="Наименование объекта" size="50">
+    </div>
+    <div class="div_form">
+        <input class='input_filtr' name='id_cust' list="cust_list"  placeholder="Заказчик" size="50">
+            <datalist id="cust_list">
+                {% for i in the_cust %}
+                    <option value={{i[0]}}>{{i[1]}}</option>
+                {% endfor %}
+            </datalist>
+    </div>
+    <div class="div_form">
+        <input class='input_filtr' name='id_reg' list="reg_list"  placeholder="Регион объекта" size="50">
+            <datalist id="reg_list">
+                {% for i in the_reg %}
+                    <option value={{i[0]}}>{{i[1]}}</option>
+                {% endfor %}
+            </datalist>
+    </div>
+    <div class="div_form">
+        <input class='input_filtr' name='date' type='TEXT' value='' placeholder="Дата создания" size="10">
+    </div>
+    <div class="div_form">
+        <input class='input_filtr' name='id_stat' list="stat_list"  placeholder="Статус" size="50">
+            <datalist id="stat_list">
+                {% for i in the_stat %}
+                    <option value={{i[0]}}>{{i[1]}}</option>
+                {% endfor %}
+            </datalist>
+    </div>
+    <div class="div_float">
+        <input class='form_button' value='Добавить' type='SUBMIT'>
+    </div>
+    <div class="div_float">
+        <input class='form_button' value='Очистить форму' type='Reset'>
+    </div>
+</form>
+<div style="clear:both;"></div>
+<form method='POST' action='#'>
+<table class="table">
+<thead>
+    <tr>
+        <td width=10px>ID</td>
+        <td width=10px align='center'>ID заказчика</td>
+        <td align='center'>Объект</td>
+        <td width=50px align='center'>ID региона</td>
+        <td width=100px align='center'>Дата создания</td>
+        <td width=100px align='center'>ID статуса</td>
+        <td width=95px> </td>
+    </tr>
+</thead>
+<tbody>
+    {% for i in the_results %}
+        <tr>
+            <td>{{i[0]}}</td>
+            <td>{{i[1]}}</td>
+            <td>{{i[2]}}</td>
+            <td>{{i[4]}}</td>
+            <td>{{i[5]}}</td>
+            <td>{{i[6]}}</td>
+            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
+        </tr>
+    {% endfor %}
+</tbody>    
+</table>
+</form>
+
+{% endblock %}
