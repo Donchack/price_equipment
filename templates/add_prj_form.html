@@ -2,72 +2,104 @@
 
 {% block body %}
 
-<form method='POST' action='/add_prj'>
+    {% if the_title == 'Изменение проекта' %}
+        <form method='POST' action='/upd_prj'>    
+            <div hidden>
+            <input type='TEXT' name='id_prj' value="{{the_result[0]}}">  
+            </div>
+    {% else %}
+        <form method='POST' action='/add_prj'>  
+    {% endif %}
     <div class="div_form">
-        <input class='input_filtr' name='name_prj' type='TEXT' value="" placeholder="Наименование объекта" size="50">
+        <label class="label_form" for="name_prj">Объект</label>
+        <input class='input_filtr' id="name_prj" name='name_prj' type='TEXT' 
+                value="{{the_result[2] if the_title == 'Изменение проекта' else ''}}" 
+                size="60" required>
     </div>
     <div class="div_form">
-        <input class='input_filtr' name='id_cust' list="cust_list"  placeholder="Заказчик" size="50">
-            <datalist id="cust_list">
-                {% for i in the_cust %}
+        <label class="label_form" for="id_cust">Заказчик</label>
+        <select class="input_select"  id="id_cust" name="id_cust" placeholder="Заказчик" 
+                size="1" required>
+            <option selected disabled hidden></option>
+            {% for i in the_cust %}
+                {% if the_title == 'Изменение проекта' and the_result[1] == i[0] %}
+                    <option value={{i[0]}} selected>{{i[1]}}</option>
+                {% else %}    
                     <option value={{i[0]}}>{{i[1]}}</option>
-                {% endfor %}
-            </datalist>
+                {% endif %}
+            {% endfor %}
+        </select>
     </div>
     <div class="div_form">
-        <input class='input_filtr' name='id_reg' list="reg_list"  placeholder="Регион объекта" size="50">
-            <datalist id="reg_list">
+        <label class="label_form" for="id_reg">Регион объекта</label>
+        <select class='input_select' id="id_reg" name='id_reg' placeholder="Регион объекта" size="1" required>
+            <option selected disabled hidden></option>
                 {% for i in the_reg %}
-                    <option value={{i[0]}}>{{i[1]}}</option>
+                    {% if the_title == 'Изменение проекта' and the_result[3] == i[0] %}
+                        <option value={{i[0]}} selected>{{i[1]}}</option>
+                    {% else %}
+                        <option value={{i[0]}}>{{i[1]}}</option>
+                    {% endif %}
                 {% endfor %}
-            </datalist>
+            </select>
     </div>
     <div class="div_form">
-        <input class='input_filtr' name='date' type='TEXT' value='' placeholder="Дата создания" size="10">
+        <label class="label_form" for="date">Дата создания</label>
+        <input class="input_filtr" id="date" name="date" type="date" 
+                value="{{the_result[4] if the_title == 'Изменение проекта' else ''}}" 
+                placeholder="Дата создания" size="10" required>
     </div>
     <div class="div_form">
-        <input class='input_filtr' name='id_stat' list="stat_list"  placeholder="Статус" size="50">
-            <datalist id="stat_list">
+        <label class="label_form" for="id_stat">Статус</label>
+        <select class="input_select" id="id_stat" name="id_stat" placeholder="Статус" size="1">
                 {% for i in the_stat %}
-                    <option value={{i[0]}}>{{i[1]}}</option>
+                    {% if the_title == 'Изменение проекта' and the_result[5] == i[0] %}
+                        <option value={{i[0]}} selected>{{i[1]}}</option>
+                    {% else %}
+                        <option value={{i[0]}}>{{i[1]}}</option>
+                    {% endif %}
                 {% endfor %}
-            </datalist>
+            </select>
     </div>
     <div class="div_float">
-        <input class='form_button' value='Добавить' type='SUBMIT'>
+            <input class='form_button' 
+                    value="{{'Сохранить изменения' if the_title == 'Изменение проекта' 
+                           else 'Добавить'}}"
+                    type='SUBMIT'>
     </div>
     <div class="div_float">
         <input class='form_button' value='Очистить форму' type='Reset'>
     </div>
 </form>
 <div style="clear:both;"></div>
-<form method='POST' action='#'>
-<table class="table">
-<thead>
-    <tr>
-        <td width=10px>ID</td>
-        <td width=10px align='center'>ID заказчика</td>
-        <td align='center'>Объект</td>
-        <td width=50px align='center'>ID региона</td>
-        <td width=100px align='center'>Дата создания</td>
-        <td width=100px align='center'>ID статуса</td>
-        <td width=95px> </td>
-    </tr>
-</thead>
-<tbody>
-    {% for i in the_results %}
+{% if the_title not in ('Изменение проекта', 'Добавление проекта') %}
+    <form method='POST' action='#'>
+    <table class="table">
+    <thead>
         <tr>
-            <td>{{i[0]}}</td>
-            <td>{{i[1]}}</td>
-            <td>{{i[2]}}</td>
-            <td>{{i[4]}}</td>
-            <td>{{i[5]}}</td>
-            <td>{{i[6]}}</td>
-            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
+            <td width=10px>ID</td>
+            <td width=10px align='center'>ID заказчика</td>
+            <td align='center'>Объект</td>
+            <td width=50px align='center'>ID региона</td>
+            <td width=100px align='center'>Дата создания</td>
+            <td width=100px align='center'>ID статуса</td>
+            <td width=95px> </td>
         </tr>
-    {% endfor %}
-</tbody>    
-</table>
-</form>
-
+    </thead>
+    <tbody>
+        {% for i in the_results %}
+            <tr>
+                <td>{{i[0]}}</td>
+                <td>{{i[1]}}</td>
+                <td>{{i[2]}}</td>
+                <td>{{i[4]}}</td>
+                <td>{{i[5]}}</td>
+                <td>{{i[6]}}</td>
+                <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
+            </tr>
+        {% endfor %}
+    </tbody>    
+    </table>
+    </form>
+{% endif %}
 {% endblock %}

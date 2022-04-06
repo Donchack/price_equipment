@@ -94,8 +94,20 @@ body {
     height: 10px;
 }
 .input_filtr{
-   height: 23px;
+   height: 25px;
    font-size: 15px;
+   border: 1px solid gray;
+}
+.input_select{
+   height: 30px;
+   width: 430px;
+   font-size: 15px;
+   background-color: white;
+   border: 1px solid gray;
+}
+.label_form{
+    width: 150px;
+    display: inline-block;
 }
 p {
     text-indent: 20px;
