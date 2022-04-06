@@ -17,7 +17,7 @@
     </div>
 </form>
 <div style="clear:both;"></div>
-<form method='POST' action='#'>
+
 <table class="table">
 <thead>
     <tr>
@@ -35,15 +35,14 @@
         <tr>
             <td>{{i[0]}}</td>
             <td>{{i[1]}}</td>
-            <td><a href="/upd_prj_form?id={{i[0]}}">{{i[2]}}</a></td>
+            <td><a class="a_nav" href="/upd_prj_form?id={{i[0]}}">{{i[2]}}</a></td>
             <td>{{i[3]}}</td>
             <td align='center'>{{i[4]}}</td>
             <td align='center'>{{i[5]}}</td>
-            <td><button name='id_1_eq' value={{i[0]}} type='SUBMIT'>История</button></td>
+            <td><a class="a_nav" href="/prj_calc_form?id={{i[0]}}">Калькуляции</a></td>
         </tr>
     {% endfor %}
 </tbody>    
 </table>
-</form>
 
 {% endblock %}

@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, url_for
 import db_sqlite
 
 
@@ -115,8 +115,8 @@ def add_prj():
 def upd_prj_form():
     dbs = db_sqlite.EquipDB()
     if request.args.get('id'):
-        result=next(dbs.get_prj(id=request.args.get('id'), object='', stat='',
-                         foreign_key=True))
+        result = next(dbs.get_prj(id=request.args.get('id'), object='',
+                                  stat='', foreign_key=True))
     # get customer list (id, customer)
     cust = dbs.get_customer()
     # get region list (id, region)
@@ -148,8 +148,29 @@ def upd_prj():
     
 @app.route('/del_prj_form', methods=['GET','POST'])
 def del_prj() -> str:
-    return render_template('list_prj_form.html', the_title='Удаление проекта',
-                           the_part1='prj', the_part2='del') 
+    return 'Страница в разработке'
+    # render_template('list_prj_form.html', the_title='Удаление проекта',
+    #                 the_part1='prj', the_part2='del') 
+
+
+@app.route('/prj_calc_form', methods=['GET','POST'])
+def prj_calc_form() -> str:
+    dbs = db_sqlite.EquipDB()
+    if request.args.get('id'):
+        result = next(dbs.get_prj(id=request.args.get('id'), 
+                         foreign_key=False))
+        calcs = dbs.get_сalc(id_prj=request.args.get('id'))
+    return render_template('prj_calc_form.html', the_title='Калькуляции проекта',
+                           the_part1='prj', the_part2='prj',
+                           the_results=result, the_calcs=calcs)
+
+
+@app.route('/add_calc', methods=['POST'])
+def add_calc() -> str:
+    dbs = db_sqlite.EquipDB()
+    if request.form.get('add_calc'):
+        dbs.add_сalc(request.form.get('add_calc'))
+    return redirect(url_for('prj_calc_form', id=request.form.get('add_calc')))
 
 
 # customer form

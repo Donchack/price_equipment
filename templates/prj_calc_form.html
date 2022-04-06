@@ -1,0 +1,60 @@
+{% extends 'base_prj.html' %}
+
+{% block body %}
+
+<table class="table">
+    <thead>
+        <tr>
+            <td width=10px>ID</td>
+            <td width=150px align='center'>Заказчик</td>
+            <td align='center'>Объект</td>
+            <td width=150px align='center'>Регион</td>
+            <td width=100px align='center'>Дата создания</td>
+            <td width=110px align='center'>Статус</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{the_results[0]}}</td>
+            <td>{{the_results[1]}}</td>
+            <td><a class="a_nav" href="/upd_prj_form?id={{the_results[0]}}">{{the_results[2]}}</a></td>
+            <td>{{the_results[3]}}</td>
+            <td align='center'>{{the_results[4]}}</td>
+            <td align='center'>{{the_results[5]}}</td>
+        </tr>
+    </tbody>    
+    </table>
+<br>
+<form method='POST' action='/add_calc'>
+    <div class="div_float"></div>
+        <button class="form_button" name='add_calc' value={{the_results[0]}} formaction='/add_calc' type='SUBMIT'>Создать калькуляцию</button>
+    </div>
+</form>
+<div style="clear:both;"></div>
+<br>
+<table class="table">
+    <thead>
+        <tr>
+            <td>ID</td>
+            <td align='center'>ID проекта</td>
+            <td align='center'>Номер</td>
+            <td align='center'>Дата</td>
+            <td align='center'>Закрыта</td>
+            <td align='center'></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in the_calcs %}
+            <tr>
+                <td align='center'>{{i[0]}}</td>
+                <td align='center'>{{i[1]}}</td>
+                <td align='center'>{{i[2]}}</td>
+                <td align='center'>{{i[3]}}</td>
+                <td align='center'>{{i[4]}}</td>
+                <td align='center'><a class="a_nav" href="/read_calc_form?id={{i[0]}}">Подробности</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>    
+    </table>
+
+{% endblock %}

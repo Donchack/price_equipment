@@ -1,4 +1,5 @@
 import sqlite3
+from datetime import datetime
 
 def sqlite_lower(value_):
     return value_.lower()
@@ -64,12 +65,20 @@ class EquipDB:
                         object text COLLATE NOCASE,
                         id_deliv_reg integer not null,
                         date_creat date,
+                        count_calc integer,
                         id_status integer not null,
                         foreign key (id_cust) references customer(id_cust),
                         foreign key (id_deliv_reg) references region(id_region),
                         foreign key (id_status) references prj_stat(id_pstat));""")
             # таблица калькуляций
-            
+            connection.execute(
+                        """create table if not exists prj_calc (
+                        id_calc integer not null primary key autoincrement,
+                        id_prj integer not null,
+                        number_calc integer not null,
+                        date_calc date,
+                        lock integer,
+                        foreign key (id_prj) references prj(id_prj));""")
             # таблица истории  проекта                
     
     def get_eqips(self, id="", name_eq="", type_eq=""):
@@ -174,6 +183,47 @@ class EquipDB:
                         (int(id_cust), name_object, int(id_deliv_reg), 
                         date_creat, int(id_status), int(id_prj)))
    
+    def get_сalc(self, id_calc="", id_prj=""):
+        """Get calculations for project with id_prj"""
+        with sqlite3.connect(self._database) as connection:
+            # Redefining LOWER to ignore the case 
+            # of Russian letters in Unicode
+            connection.create_function("LOWER", 1, sqlite_lower)
+            list_value =[]
+            crit1 = crit2 = operand = ''
+            if id_calc:
+                crit1 = 'id_calc = ?'
+                list_value.append(id_calc)
+            if id_prj:
+                crit2 = 'id_prj = ?'
+                list_value.append(id_prj)    
+            operand = 'and' if id_calc and id_prj else ''
+            str_req = f"""select * from prj_calc
+                        where {crit1} {operand} {crit2}"""
+            result = connection.execute(str_req, list_value)
+        return result
+    
+    def add_сalc(self, id_prj=""):
+        """Add calculations for project with id_prj"""
+        with sqlite3.connect(self._database) as connection:
+            prev_number_calc = next(connection.execute(
+                        """select max(number_calc) from prj_calc
+                        where id_prj = ?""",
+                        (id_prj,)))[0]
+            number_calc_now = (
+                        int(prev_number_calc) 
+                        if prev_number_calc is not None 
+                        else 0)
+            now_date = datetime.now().date()
+            connection.execute(
+                        """insert into prj_calc 
+                        (id_prj, number_calc, date_calc, lock)
+                        values(?, ?, ?, ?)""",
+                        (
+                         int(id_prj), 
+                         number_calc_now + 1,
+                         now_date, 0))
+
     def get_customer(self, id_cust="", customer="", prof=""):
         with sqlite3.connect(self._database) as connection:
             #Redefining LOWER to ignore the case 
