@@ -9,6 +9,10 @@ body {
     margin-top: 0%;
     margin-bottom: 0%;
 }
+div {
+    margin-left: 10px;
+    margin-right: 10px;
+}
 .main_div{
     background-color: #e9f0cd;
 }
@@ -51,15 +55,33 @@ body {
     float: none;
 }
 .div_nav2 div{
-    float: left;
-    margin: 0;
+    margin: 0px;
     padding: 5px;
 }
 .div_nav2 .select{
     background-color: #769aa5;
+}
+.div_float{
     float: left;
     margin: 0;
     padding: 5px;
+    padding-left: 0px;
+}
+.div_form{
+    margin-left: 0;
+    margin-top: 5px;
+}
+.div_sep{
+    height: 10px;
+}
+.div_left{
+    float: left;
+}
+.div_right{
+    float: right;
+}
+.div_marg_5px{
+    margin: 5px;
 }
 .a_nav{
     color:#528b9c;
@@ -80,18 +102,8 @@ body {
 .select .a_nav:hover{
     color:#9bfcf4;
 }
-.div_float{
-    float: left;
-    margin: 0;
-    padding: 5px;
-    padding-left: 0px;
-}
-.div_form{
-    margin-left: 0;
-    margin-top: 5px;
-}
-.div_sep{
-    height: 10px;
+.a_as_button{
+    background-color: #769aa5;
 }
 .input_filtr{
    height: 25px;
@@ -105,11 +117,20 @@ body {
    background-color: white;
    border: 1px solid gray;
 }
+.input_60px{
+    width: 60px;
+}
+.input_150px{
+    width: 150px;
+}
 .label_form{
     width: 150px;
     display: inline-block;
 }
-p {
+.label_1{
+    width: 100px;
+}
+p{
     text-indent: 20px;
 }
 .form_text {
@@ -158,10 +179,7 @@ p {
     font-weight: bold;
     font-style: italic;
 }
-div {
-    margin-left: 10px;
-    margin-right: 10px;
-}
+
 ul {
     list-style-type:square;
     list-style-position:inside;

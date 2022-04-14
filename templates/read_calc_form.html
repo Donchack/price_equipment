@@ -1,0 +1,70 @@
+{% extends "base_prj.html" %}
+
+{% block body %}
+<div style="clear:both;"></div>
+<div class="div_nav2 form_text"> 
+    Калькуляция:
+    </div>
+<br>
+<div class="div_form">
+    <label class="label_form label_1" for="lock_calc">Утверждена</label>
+        <select class="input_select input_60px"  id="lock_calc" name="lock_calc"  
+                size="1" required>
+            <option value=0 selected>Нет</option>
+            <option value=1>Да</option>
+        </select>
+</div>
+<div class="div_form">
+    <label class="label_form label_1" for="cost_calc">ИТОГО:</label>
+        <input class="input_filtr input_150px" id="cost_calc" name="cost_calc"
+                type="TEXT" value="Сумма калькуляции" 
+                size="60" disabled required>
+</div>
+<br>
+    <form method="POST" action="/save_calc">
+        <div class="div_float">
+            <button class="form_button" name="equip_select_btn" value="{{the_id_calc}}" formaction="/eqip_prices" type="SUBMIT">Добавить оборудование</button>
+        </div>
+        <div class="div_float div_right">
+            <input class="form_button" value="Отменить" type="Reset">
+        </div>
+        <div class="div_float div_right">
+            <input class="form_button" 
+                    value="Сохранить изменения"
+                    type="SUBMIT">
+        </div>
+    </form>
+</div>
+<div style="clear:both;"></div>
+<table class="table">
+    <thead>
+        <tr>
+            <td align="center">ID</td>
+            <td align="center">ID calc</td>
+            <td align="center">№</td>
+            <td align="center">ID equip</td>
+            <td align="center">Название</td>
+            <td align="center">Стоимость</td>
+            <td align="center">Кол-во</td>
+            <td align="center">Итого</td>
+            <td align="center"></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for i in the_calcs %}
+            <tr>
+                <td align="center">i[0]</td>
+                <td align="center">i[1]</td>
+                <td align="center">i[2]</td>
+                <td align="center">i[3]</td>
+                <td align="center">i[4]</td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"></td>
+                <td align="center"><a class="a_nav" href="/del_equip_from_calc?id=i[0]">Удалить</a></td>
+            </tr>
+        {% endfor %}
+    </tbody>    
+    </table>
+
+{% endblock %}

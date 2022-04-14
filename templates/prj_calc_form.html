@@ -1,7 +1,9 @@
 {% extends 'base_prj.html' %}
 
 {% block body %}
-
+<div class="div_nav2 form_text"> 
+Калькуляции для проекта:
+</div>
 <table class="table">
     <thead>
         <tr>
@@ -26,7 +28,7 @@
     </table>
 <br>
 <form method='POST' action='/add_calc'>
-    <div class="div_float"></div>
+    <div class="div_float">
         <button class="form_button" name='add_calc' value={{the_results[0]}} formaction='/add_calc' type='SUBMIT'>Создать калькуляцию</button>
     </div>
 </form>

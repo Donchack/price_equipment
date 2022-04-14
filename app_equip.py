@@ -14,10 +14,11 @@ def eqip_prices() -> str:
         s_id = request.form.get('search_id','')
         s_name_eq = request.form.get('search_name_eq','')
         s_type_eq = request.form.get('search_type_eq','')
+    id_calc = request.form.get('equip_select_btn','')
     result = dbs.get_eqips(id = s_id, name_eq = s_name_eq, type_eq = s_type_eq)
     return render_template('eqip_prices.html', the_title='CПИСОК ОБОРУДОВАНИЯ',
                            the_part1='equip', the_part2='prices',
-                           the_results=result)
+                           the_results=result, the_id_calc=id_calc)
 
 
 # Adding a equipment
@@ -172,6 +173,14 @@ def add_calc() -> str:
         dbs.add_сalc(request.form.get('add_calc'))
     return redirect(url_for('prj_calc_form', id=request.form.get('add_calc')))
 
+
+@app.route('/read_calc_form', methods=['GET', 'POST'])
+def read_calc_form() -> str:
+    back_to_page = '/prj_calc_form'
+    id_calc = request.args.get('id')
+    return render_template('read_calc_form.html', the_title='Калькуляции проекта',
+                           the_part1='prj', the_part2='prj',
+                           back_to_the_page=back_to_page, the_id_calc=id_calc)
 
 # customer form
 @app.route('/admin')

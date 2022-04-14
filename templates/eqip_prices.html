@@ -1,27 +1,27 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
 
 {% block body %}
 
-<form method='POST' action='/eqip_prices'>
+<form method="POST" action="/eqip_prices">
     
     <div class="div_float">
-        <input class='input_filtr' name='search_id' type='TEXT' value='' placeholder="ID" size="3">
+        <input class="input_filtr" name="search_id" type="TEXT" value="" placeholder="ID" size="3">
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='search_name_eq' type='TEXT' value="" placeholder="Наименование оборудования" size="40">
+        <input class="input_filtr" name="search_name_eq" type="TEXT" value="" placeholder="Наименование оборудования" size="40">
     </div>
     <div class="div_float">
-        <input class='input_filtr' name='search_type_eq' type='TEXT' value="" placeholder="Тип" size="15">
+        <input class="input_filtr" name="search_type_eq" type="TEXT" value="" placeholder="Тип" size="15">
     </div>
     <div class="div_float">
-        <input class='form_button' name='bottom_find' value='Найти' type='SUBMIT'>
+        <input class="form_button" name="bottom_find" value="Найти" type="SUBMIT">
     </div>
     <div class="div_float">
-        <input class='form_button' name='bottom_clear' value='Сбросить' type='SUBMIT'>
+        <input class="form_button" name="bottom_clear" value="Сбросить" type="SUBMIT">
     </div>
 </form>
 <div style="clear:both;"></div>
-<form method='POST' action='/1_equip'>
+<form method="POST" action="/1_equip">
 <table class="table">
 <thead>
     <tr>
@@ -43,7 +43,18 @@
             <td align="right">{{i[4]}}</td>
             <td align="center">{{i[5]}}</td>
             <td>{{i[6]}}</td>
-            <td><button class="tb_button" name='id_1_eq' value={{i[0]}} type='SUBMIT'>Журнал цен</button></td>
+            <td>
+                {% if the_id_calc %}
+                    <button 
+                            class="tb_button" formaction="/eqip_add_in_calc" 
+                            name="eqip_add_in_calc" value={{i[0]}} 
+                            type="SUBMIT">
+                            Добавить оборудование
+                    </button>
+                {% else %}
+                    <button class="tb_button" name="id_1_eq" value={{i[0]}} type="SUBMIT">Журнал цен</button>
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
 </tbody>    
