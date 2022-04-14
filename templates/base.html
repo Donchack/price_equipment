@@ -3,29 +3,29 @@
 {% block secondhead %}
 <div class="div_nav2">
     {% if the_part2=='prices' %}
-        <div class="select">
-            <a class="a_nav" href="/eqip_prices">Прайс</a>
+        <div class="div_left select">
+            <a class="a_nav" href="/eqip_prices">Каталог</a>
         </div>
         {% else %}
-            <div>
-                <a class="a_nav" href="/eqip_prices">Прайс</a>
+            <div class="div_left">
+                <a class="a_nav" href="/eqip_prices">Каталог</a>
             </div>
     {% endif %}
     {% if the_part2=='add' %}
-        <div class="select">
+        <div class="div_left select">
             <a class="a_nav" href="/add_eqip_form">Добавить</a>
         </div>
         {% else %}
-            <div>
+            <div class="div_left">
                 <a class="a_nav" href="/add_eqip_form">Добавить</a>
             </div>
     {% endif %}
     {% if the_part2=='del' %}
-        <div class="select">
+        <div class="div_left select">
             <a class="a_nav" href="/del_eqip_form">Удалить</a>
         </div>
         {% else %}
-            <div>
+            <div class="div_left">
                 <a class="a_nav" href="/del_eqip_form">Удалить</a>
             </div>
     {% endif %}

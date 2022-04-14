@@ -16,7 +16,7 @@ def eqip_prices() -> str:
         s_type_eq = request.form.get('search_type_eq','')
     id_calc = request.form.get('equip_select_btn','')
     result = dbs.get_eqips(id = s_id, name_eq = s_name_eq, type_eq = s_type_eq)
-    return render_template('eqip_prices.html', the_title='CПИСОК ОБОРУДОВАНИЯ',
+    return render_template('eqip_prices.html', the_title='КАТАЛОГ',
                            the_part1='equip', the_part2='prices',
                            the_results=result, the_id_calc=id_calc)
 
@@ -29,7 +29,7 @@ def add_eqip():
     type_equip = request.form.get('type_equip')
     if name_equip and type_equip:
         dbs.add_equip(name_equip, type_equip)
-    return render_template('add_equip_form.html', the_title='ДОБАВЛЕНИЕ ОБОРУДОВАНИЯ',
+    return render_template('add_equip_form.html', the_title='Добавление оборудования',
                            the_part1='equip', the_part2='add')
 
 
@@ -40,7 +40,7 @@ def del_eqip():
     if request.form.get('ID_equip'):
         dbs.del_equip(request.form['ID_equip'])
     result = dbs.get_eqips()
-    return render_template('del_equip_form.html', the_title='УДАЛЕНИЕ ОБОРУДОВАНИЯ',
+    return render_template('del_equip_form.html', the_title='Удаление оборудования',
                            the_results=result, the_part1='equip', the_part2='del')
 
 
@@ -75,7 +75,7 @@ def list_prj() -> str:
     result = dbs.get_prj(
                          id = id_prj, object = object, stat = prj_stat,
                          foreign_key=False)
-    return render_template('list_prj_form.html', the_title='CПИСОК ПРОЕКТОВ',
+    return render_template('list_prj_form.html', the_title='ПРОЕКТЫ',
                            the_results=result, the_part1='prj',
                            the_part2='prj')
 
@@ -193,7 +193,7 @@ def customer_form():
     dbs = db_sqlite.EquipDB()
     # get result select customer
     result=dbs.get_customer(s_id, s_name_cust, s_prof_cust)
-    return render_template('customer_form.html', the_title='Форма заказчиков',
+    return render_template('customer_form.html', the_title='ЗАКАЗЧИКИ',
                            the_part1='adm', the_part2='customer',
                            the_results=result)
 
@@ -255,7 +255,7 @@ def prj_stat_form():
     dbs = db_sqlite.EquipDB()
     # get result select prj_stat
     result=dbs.get_prj_stat(s_id, s_name_prj_stat)
-    return render_template('prj_stat_form.html', the_title='Статусы',
+    return render_template('prj_stat_form.html', the_title='СТАТУСЫ',
                            the_part1='adm', the_part2='stat',
                            the_results=result)
 
@@ -311,7 +311,7 @@ def region_form():
     dbs = db_sqlite.EquipDB()
     # get result select region
     result=dbs.get_region(s_id, s_region)
-    return render_template('region_form.html', the_title='Регионы',
+    return render_template('region_form.html', the_title='РЕГИОНЫ',
                            the_part1='adm', the_part2='region',
                            the_results=result)
 
@@ -345,7 +345,7 @@ def upd_region_form():
     dbs = db_sqlite.EquipDB()
     if request.form.get('upd_region'):
         result=next(dbs.get_region(request.form.get('upd_region')))
-        return render_template('upd_region.html', the_title='Правка статуса',
+        return render_template('upd_region.html', the_title='Правка региона',
                                the_part1='adm', the_part2='region',
                                the_result=result)
 
